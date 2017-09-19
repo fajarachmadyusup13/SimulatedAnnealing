@@ -26,14 +26,15 @@ public class Driver {
     }
     
     public static void heading(){
-        System.out.println("---------------------------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
         System.out.print(String.format("%13s %13s", "x1", "|"));
         System.out.print(String.format("%13s %13s", "x2", "|"));
         System.out.print(String.format("%6s %3s", "Temp", "|"));
+        System.out.print(String.format("%20s %6s", "Result Func", "|"));
         System.out.print(String.format("%20s %6s", "Best So Far", "|"));
         System.out.print(String.format("%5s %1s", "Rand", "|"));
         System.out.println(String.format("%5s %1s", "Prob", "|"));
-        System.out.println("---------------------------------------------------------------------------------------------------------");
+        System.out.println("------------------------------------------------------------------------------------------------------------------------------------");
     }
     
 }
