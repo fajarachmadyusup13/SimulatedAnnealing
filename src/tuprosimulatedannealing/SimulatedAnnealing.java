@@ -21,51 +21,48 @@ public class SimulatedAnnealing {
         double temperature      = INITIAL_TEMPERATURE;
         State newState          = randomized();
         State currentState      = newState;
-        double tempBestSoFar    = Formula.countResult(newState);
-        double bestSoFar        = tempBestSoFar;
+        double newFunc          = Formula.countResult(newState);
+        double currentFunc      = newFunc;
         
         while (temperature > MIN_TEMPERATURE) {
             
             System.out.print(String.format("%21s %5s", currentState.getX1(), "|"));
             System.out.print(String.format("%21s %5s", currentState.getX2(), "|"));
             System.out.print(String.format("%7s %2s", String.format("%.2f", temperature), "|"));
-            System.out.print(String.format("%22s %4s", tempBestSoFar, "|"));
-            System.out.print(String.format("%22s %4s", bestSoFar, "|"));
+            System.out.print(String.format("%22s %4s", newFunc, "|"));
+            System.out.print(String.format("%22s %4s", currentFunc, "|"));
             
             
-            newState         = randomized();
-            tempBestSoFar    = Formula.countResult(newState);
-            if (tempBestSoFar < bestSoFar) {
-                bestSoFar       = tempBestSoFar;
+            newState                = randomized();
+            newFunc    = Formula.countResult(newState);
+            
+            if (newFunc < currentFunc) {
+                currentFunc     = newFunc;
                 currentState    = newState;
             }
-            if (acceptProb(tempBestSoFar, bestSoFar, temperature)) {
+            if (acceptProb(newFunc, currentFunc, temperature)) {
 //                bestSoFar = tempBestSoFar;
-                currentState = newState; 
+                currentState = newState;
             }
-                
+            
             temperature *= 1-RATE_OF_COOLING;
         }
-        
-        System.out.println("----------------------------");
-        System.out.println("| Best of Far: " + bestSoFar + "|");
     }
     
-    public boolean acceptProb(double tempBestSoFar, double bestSoFar, double temperature){
-        double acceptanceProbability = 0.0;
+    public boolean acceptProb(double newFunc, double currentSolution, double temperature){
+        double acceptanceProbability = 1.0;
         String decision = null;
         boolean lowerResult = true;
         boolean acceptResultFlag = false;
         double randomNumber = Math.random();
         
-        if (tempBestSoFar >= bestSoFar) {
-            acceptanceProbability = Math.exp((bestSoFar - tempBestSoFar)/temperature);
+        if (newFunc >= currentSolution) {
+            acceptanceProbability = Math.exp((currentSolution - newFunc)/temperature);
             lowerResult = false;
-            if (acceptanceProbability > randomNumber) {
-                acceptResultFlag = true;
-            }
         }
-        
+        if (acceptanceProbability > randomNumber) {
+            acceptResultFlag = true;
+        }
         
         System.out.print(String.format("%5s %1s", String.format("%.2f", randomNumber), "|"));
         System.out.println(String.format("%5s %1s", String.format("%.2f", acceptanceProbability), "|"));
