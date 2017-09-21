@@ -44,12 +44,12 @@ public class SimulatedAnnealing {
                 }
             }
             
-            System.out.print(String.format("%21s %5s", newState.getX1(), "|"));
-            System.out.print(String.format("%21s %5s", newState.getX2(), "|"));
+            System.out.print("|" + String.format("%15s %5s", String.format("%.8f", newState.getX1()), "|"));
+            System.out.print(String.format("%15s %5s", String.format("%.8f", newState.getX2()), "|"));
             System.out.print(String.format("%7s %2s", String.format("%.2f", temperature), "|"));
-            System.out.print(String.format("%22s %4s", newFunc, "|"));
-            System.out.print(String.format("%22s %4s", currFunc, "|"));
-            System.out.print(String.format("%22s %4s", bestOfFar  , "|"));
+            System.out.print(String.format("%16s %4s", String.format("%.8f", newFunc), "|"));
+            System.out.print(String.format("%16s %4s", String.format("%.8f", currFunc), "|"));
+            System.out.print(String.format("%16s %4s", String.format("%.8f", bestOfFar)  , "|"));
             
             System.out.print(String.format("%5s %1s", String.format("%.2f", randomNumber), "|"));
             System.out.println(String.format("%5s %1s", String.format("%.2f", acceptanceProbability), "|"));
@@ -66,13 +66,13 @@ public class SimulatedAnnealing {
 //            }            
             temperature *= 1-RATE_OF_COOLING;
         }
-        
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------");
         System.out.println("");
         System.out.println("----------------------------------------------");
-        System.out.println("| Best so Far  : " + String.format("%23s %5s", bestOfFar, "|"));
-        System.out.println("| Current Func : " + String.format("%23s %5s", currFunc, "|"));
-        System.out.println("| x1           : " + String.format("%23s %5s", bestX1, "|"));
-        System.out.println("| x2           : " + String.format("%23s %5s", bestX2, "|"));
+        System.out.println("| Best so Far  : " + String.format("%23s %5s", String.format("%.8f", bestOfFar), "|"));
+        System.out.println("| Current Func : " + String.format("%23s %5s", String.format("%.8f", currFunc), "|"));
+        System.out.println("| x1           : " + String.format("%23s %5s", String.format("%.8f", bestX1), "|"));
+        System.out.println("| x2           : " + String.format("%23s %5s", String.format("%.8f", bestX2), "|"));
         System.out.println("----------------------------------------------");
     }
     
